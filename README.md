@@ -1,6 +1,8 @@
 # AI Powered Documents Search (RAG)
 
-![AI powered docs search logo](https://github.com/Shardala/next-ai-powered-docs-search/blob/main/assets/aidocsimg.png "AI powered docs search logo")
+<img src="./public/aidocsimg.png">
+
+<br />
 
 # Features:
 
