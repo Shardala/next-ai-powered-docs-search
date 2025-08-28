@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { embedTexts } from "lib/embeddings";
 import { upsertChunks } from "lib/vector-db";
 import pdf from "pdf-parse";
+import { noFile } from 'app/consts';
 
 export const runtime = 'nodejs';
 
@@ -25,7 +26,7 @@ export async function POST(req: NextRequest) {
   const form = await req.formData();
   const file = form.get('file') as File | null;
 
-  if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 });
+  if (!file) return NextResponse.json({ error: noFile }, { status: 400 });
 
   const arrayBuffer = await file.arrayBuffer();
   const bytes = Buffer.from(arrayBuffer);

@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
 import { embedTexts } from 'lib/embeddings';
 import { supabase } from "lib/vector-db";
+import { noQuestion, noResponse } from 'app/consts';
 
 export const runtime = 'nodejs';
 
@@ -10,7 +11,7 @@ const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export async function POST(req: NextRequest) {
   try {
     const { question } = await req.json();
-    if (!question) return NextResponse.json({ error: 'No question' }, { status: 400 });
+    if (!question) return NextResponse.json({ error: noQuestion }, { status: 400 });
 
     // Embed the question
     const [qEmbedding] = await embedTexts([question]);
@@ -33,7 +34,7 @@ QUESTION: ${'${question}'}`;
       messages: [{ role: "user", content: prompt }],
       temperature: 0.2
     });
-    const answer = completion.choices[0]?.message?.content ?? "No response";
+    const answer = completion.choices[0]?.message?.content ?? noResponse;
 
     const citations = (data || []).map((d:any) => ({
       source: d.source, page: d.page, snippet: d.chunk.slice(0, 200) + '...'

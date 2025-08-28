@@ -9,3 +9,6 @@ export const questionsHere = "Questions here";
 export const sendTxt = "Send";
 export const answerTxt = "Answer";
 export const thinking = "Thinking..";
+export const noQuestion = 'No question';
+export const noResponse = 'No response';
+export const noFile = 'No file';
